@@ -71,10 +71,10 @@ router.get("/plans/:id", getPlan);
  *         - name: category
  *           in: query
  *           required: false
- *           description:  plans by category MADINA or MAKKAH.
+ *           description:  plans by category hajj or umrah.
  *           schema:
  *             type: string
- *             example: "MADINA"
+ *             example: "umrah"
  *       responses:
  *         '200':
  *           description: Plans retrieved successfully

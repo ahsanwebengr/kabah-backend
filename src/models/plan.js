@@ -9,16 +9,31 @@ const planSchema = Schema({
     type: Number,
     required: true,
   },
-  thumbnail:{
+  thumbnail: {
     type: String,
   },
-  category:{
+  category: {
     type: String,
-  enum: ["MADINA", "MAKKAH"],
+    enum: ["hajj", "umrah"],
     required: true,
   },
-  slug:{
+  slug: {
     type: String,
+    required: true,
+  },
+  flights: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
+  transport: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
+  sharing: {
+    type: Boolean,
+    default: true,
     required: true,
   },
   description: {
@@ -92,8 +107,6 @@ const planSchema = Schema({
     },
     qurbani: {
       type: Boolean,
-      default: true,
-      required: true,
     },
   },
   price_excludes: {
