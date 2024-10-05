@@ -227,7 +227,7 @@ router.put("/blog-media/:id", updateImages);
  *                   type: string
  *                   example: "Internal server error"
  */
-router.delete("/blog/:id", deleteBlog);
+router.delete("/blogs/:id", deleteBlog);
 
 /**
  * @swagger
