@@ -74,9 +74,9 @@ const router = express.Router();
  *                   description: Number of children in the group
  *                 type:
  *                   type: string
- *                   enum: [general, contact]
- *                   example: "general"
- *                   description: The type of contact (general or contact)
+ *                   enum: [price_qoute, contact]
+ *                   example: "price_qoute"
+ *                   description: The type of contact (price_qoute or contact)
  *                 your_message:
  *                   type: string
  *                   example: "I would like to inquire about your travel package."

@@ -14,7 +14,7 @@ const contact_form_Schema = Schema({
     required: true,
     match: /.+\@.+\..+/,
   },
-  subject:{
+  subject: {
     type: String,
     //required: true,
   },
@@ -24,7 +24,7 @@ const contact_form_Schema = Schema({
   },
   hotel_category: {
     type: String,
-    enum: ["3_star", "4_star", "5_star", "2_star"],
+    enum: ['3_star', '4_star', '5_star', '2_star'],
     //required: true,
   },
   departure_date: {
@@ -53,13 +53,13 @@ const contact_form_Schema = Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "complete"],
-    default: "pending",
+    enum: ['pending', 'complete'],
+    default: 'pending',
   },
   type: {
     type: String,
-    enum: ["general", "contact"],
-   // required: true,
+    enum: ['price_qoute', 'contact'],
+    // required: true,
   },
   cratedAt: {
     type: Date,
@@ -69,9 +69,9 @@ const contact_form_Schema = Schema({
     type: Boolean,
     default: false,
   },
-  your_message:{
+  your_message: {
     type: String,
-   // required: true,
+    // required: true,
   },
 });
 

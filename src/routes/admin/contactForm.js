@@ -33,10 +33,10 @@ const router = express.Router();
  *           example: 12
  *         - name: type
  *           in: query
- *           description: The type of contact (e.g., "general","contact").
+ *           description: The type of contact (e.g., "price_qoute","contact").
  *           required: false
  *           type: string
- *           example: "general"
+ *           example: "price_qoute"
  *       responses:
  *         200:
  *           description: Successfully retrieved contacts
@@ -142,10 +142,10 @@ router.get("/contacts/:id", contactForm);
  *       parameters:
  *         - name: type
  *           in: query
- *           description: The type of contacts to delete (e.g., "general","contact"). If not provided, all contacts will be deleted.
+ *           description: The type of contacts to delete (e.g., "price_qoute","contact"). If not provided, all contacts will be deleted.
  *           required: false
  *           type: string
- *           example: "general"
+ *           example: "price_qoute"
  *       responses:
  *         200:
  *           description: Successfully deleted contacts
