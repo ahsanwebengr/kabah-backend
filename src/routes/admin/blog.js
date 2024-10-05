@@ -183,7 +183,7 @@ router.put("/blog-media/:id", updateImages);
 
 /**
  * @swagger
- * /admin/blog/{id}:
+ * /admin/blogs/{id}:
  *   delete:
  *     summary: Delete a specific blog
  *     tags: [Admin]
