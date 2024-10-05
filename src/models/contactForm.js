@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const contact_form_Schema = Schema({
   full_name: {
@@ -58,7 +58,7 @@ const contact_form_Schema = Schema({
   },
   type: {
     type: String,
-    enum: ['price_qoute', 'contact'],
+    enum: ['price quote', 'contact'],
     // required: true,
   },
   cratedAt: {
@@ -75,4 +75,4 @@ const contact_form_Schema = Schema({
   },
 });
 
-export default model("contactForm", contact_form_Schema);
+export default model('contactForm', contact_form_Schema);

@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 import {
   getContactForm,
   contactForm,
   deleteAllContacts,
   deleteContact,
-} from "../../controllers/admin.js/contactForm.js";
+} from '../../controllers/admin.js/contactForm.js';
 const router = express.Router();
 
 /**
@@ -33,10 +33,10 @@ const router = express.Router();
  *           example: 12
  *         - name: type
  *           in: query
- *           description: The type of contact (e.g., "price_qoute","contact").
+ *           description: The type of contact (e.g., "price quote","contact").
  *           required: false
  *           type: string
- *           example: "price_qoute"
+ *           example: "price quote"
  *       responses:
  *         200:
  *           description: Successfully retrieved contacts
@@ -82,8 +82,7 @@ const router = express.Router();
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.get("/contacts", getContactForm);
-
+router.get('/contacts', getContactForm);
 
 /**
  * @swagger
@@ -127,8 +126,7 @@ router.get("/contacts", getContactForm);
  *              message:
  *                type: string
  */
-router.get("/contacts/:id", contactForm);
-
+router.get('/contacts/:id', contactForm);
 
 /**
  * @swagger
@@ -142,10 +140,10 @@ router.get("/contacts/:id", contactForm);
  *       parameters:
  *         - name: type
  *           in: query
- *           description: The type of contacts to delete (e.g., "price_qoute","contact"). If not provided, all contacts will be deleted.
+ *           description: The type of contacts to delete (e.g., "price quote","contact"). If not provided, all contacts will be deleted.
  *           required: false
  *           type: string
- *           example: "price_qoute"
+ *           example: "price quote"
  *       responses:
  *         200:
  *           description: Successfully deleted contacts
@@ -172,7 +170,7 @@ router.get("/contacts/:id", contactForm);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete("/contacts", deleteAllContacts);
+router.delete('/contacts', deleteAllContacts);
 
 /**
  * @swagger
@@ -189,7 +187,7 @@ router.delete("/contacts", deleteAllContacts);
  *           description: The ID of the contact to delete.
  *           required: true
  *           type: string
- *           example: "60d21b4667d0d8992e610c85"  
+ *           example: "60d21b4667d0d8992e610c85"
  *       responses:
  *         200:
  *           description: Successfully deleted the contact
@@ -216,5 +214,5 @@ router.delete("/contacts", deleteAllContacts);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete("/contacts/:id", deleteContact);
+router.delete('/contacts/:id', deleteContact);
 export default router;

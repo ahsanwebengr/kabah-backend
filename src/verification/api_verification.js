@@ -136,9 +136,9 @@ const contact_form_validationSchema = Joi.object({
     'any.only': '"Status" must be one of [pending, complete]',
   }),
 
-  type: Joi.string().valid('price_qoute', 'contact').messages({
+  type: Joi.string().valid('price quote', 'contact').messages({
     'string.base': '"Type" should be a type of string',
-    'any.only': '"Type" must be one of [price_qoute, contact]',
+    'any.only': '"Type" must be one of [price quote, contact]',
   }),
 
   your_message: Joi.string().messages({

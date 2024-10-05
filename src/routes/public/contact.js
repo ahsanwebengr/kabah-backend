@@ -1,5 +1,5 @@
-import express from "express";
-import { contactForm } from "../../controllers/public/contactForm.js";
+import express from 'express';
+import { contactForm } from '../../controllers/public/contactForm.js';
 
 const router = express.Router();
 
@@ -74,9 +74,9 @@ const router = express.Router();
  *                   description: Number of children in the group
  *                 type:
  *                   type: string
- *                   enum: [price_qoute, contact]
- *                   example: "price_qoute"
- *                   description: The type of contact (price_qoute or contact)
+ *                   enum: [price quote, contact]
+ *                   example: "price quote"
+ *                   description: The type of contact (price quote or contact)
  *                 your_message:
  *                   type: string
  *                   example: "I would like to inquire about your travel package."
@@ -116,7 +116,6 @@ const router = express.Router();
  *                     type: string
  *                     example: "Internal server error"
  */
-router.post("/contacts", contactForm);
-
+router.post('/contacts', contactForm);
 
 export default router;
