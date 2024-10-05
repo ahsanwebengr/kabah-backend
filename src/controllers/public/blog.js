@@ -1,13 +1,13 @@
-import Blogs from "../../models/Blog.js";
+import Blogs from "../../models/blog.js";
 import { catchAsync } from "../../middleware/utils.js";
 
 //getBlog
-export const getBlog = catchAsync(async (req, res) => {
+export const getBlogById = catchAsync(async (req, res) => {
   const blog = await Blogs.findById(req.params.id);
   if (!blog) {
-    return res.status(404).json({ message: "Blog Not Found" });
+    return res.status(404).json({ error: "Blog Not Found" });
   }
-  res.status(200).json({ message: "Blog Get Successfully", blog });
+  res.status(200).json({ blog });
 });
 
 //getBlogs
@@ -27,5 +27,5 @@ export const getBlogs = catchAsync(async (req, res) => {
     blogs: blog,
   };
 
-  return res.status(201).json({ blog, message: "Blogs Get Successfully" });
+  return res.status(201).json({ blog});
 });

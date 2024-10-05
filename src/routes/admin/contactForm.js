@@ -2,6 +2,8 @@ import express from "express";
 import {
   getContactForm,
   contactForm,
+  deleteAllContacts,
+  deleteContact,
 } from "../../controllers/admin.js/contactForm.js";
 const router = express.Router();
 
@@ -13,20 +15,28 @@ const router = express.Router();
  *       summary: Retrieve a list of contacts
  *       tags:
  *         - Admin
- *       description: Returns a paginated list of contacts  form.
+ *       description: Returns a paginated list of contacts.
  *       parameters:
  *         - name: page
  *           in: query
- *           description: Page number to retrieve (default is 1)
+ *           description: Page number to retrieve (default is 1).
  *           required: false
  *           type: integer
+ *           example: 1
  *           format: int32
  *         - name: limit
  *           in: query
- *           description: Number of contacts to retrieve per page (default is 12)
+ *           description: Number of contacts to retrieve per page (default is 12).
  *           required: false
  *           type: integer
  *           format: int32
+ *           example: 12
+ *         - name: type
+ *           in: query
+ *           description: The type of contact (e.g., "general","contact").
+ *           required: false
+ *           type: string
+ *           example: "general"
  *       responses:
  *         200:
  *           description: Successfully retrieved contacts
@@ -35,14 +45,14 @@ const router = express.Router();
  *             properties:
  *               message:
  *                 type: string
- *                 example: "Contact Get Successfully"
+ *                 example: "Contacts retrieved successfully."
  *               pages:
  *                 type: integer
  *                 example: 5
  *               total:
  *                 type: integer
  *                 example: 50
- *               AIs:
+ *               contacts:
  *                 type: array
  *                 items:
  *                   type: object
@@ -73,6 +83,7 @@ const router = express.Router();
  *                 example: "Internal Server Error"
  */
 router.get("/contacts", getContactForm);
+
 
 /**
  * @swagger
@@ -118,4 +129,92 @@ router.get("/contacts", getContactForm);
  */
 router.get("/contacts/:id", contactForm);
 
+
+/**
+ * @swagger
+ * paths:
+ *   /admin/contacts:
+ *     delete:
+ *       summary: Delete all contacts
+ *       tags:
+ *         - Admin
+ *       description: Deletes all contacts, optionally filtered by type.
+ *       parameters:
+ *         - name: type
+ *           in: query
+ *           description: The type of contacts to delete (e.g., "general","contact"). If not provided, all contacts will be deleted.
+ *           required: false
+ *           type: string
+ *           example: "general"
+ *       responses:
+ *         200:
+ *           description: Successfully deleted contacts
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "All contacts deleted successfully."
+ *         404:
+ *           description: No contacts found to delete
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "No contacts found to delete."
+ *         500:
+ *           description: Internal server error
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "Internal Server Error"
+ */
+router.delete("/contacts", deleteAllContacts);
+
+/**
+ * @swagger
+ * paths:
+ *   /admin/contacts/{id}:
+ *     delete:
+ *       summary: Delete a contact by ID
+ *       tags:
+ *         - Admin
+ *       description: Deletes a specific contact from the database using its ID.
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           description: The ID of the contact to delete.
+ *           required: true
+ *           type: string
+ *           example: "60d21b4667d0d8992e610c85"  
+ *       responses:
+ *         200:
+ *           description: Successfully deleted the contact
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "Contact deleted successfully."
+ *         404:
+ *           description: Contact not found
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "Contact not found."
+ *         500:
+ *           description: Internal server error
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "Internal Server Error"
+ */
+router.delete("/contacts/:id", deleteContact);
 export default router;

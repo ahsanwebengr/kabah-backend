@@ -5,7 +5,8 @@ const planVerificationSchema = Joi.object({
   visa_fee: Joi.boolean().default(true),
   return_flight_fares: Joi.boolean().default(true),
   days_21_hotel_accommodation: Joi.boolean().default(true),
-  all_transportation_between_makkah_medinah_airport: Joi.boolean().default(true),
+  all_transportation_between_makkah_medinah_airport:
+    Joi.boolean().default(true),
   ziyarahs_in_makkah_medinah: Joi.boolean().default(true),
   emergency_helpline_24_7: Joi.boolean().default(true),
   mina_services_with_ac_tents_mattress_pillow: Joi.boolean().default(true),
@@ -70,78 +71,87 @@ const planValidationSchema = Joi.object({
   what_to_expect: whatToExpectSchema.required(),
 });
 
-
 const contact_form_validationSchema = Joi.object({
-  departure_airport: Joi.string().required().messages({
+  departure_airport: Joi.string().messages({
     "string.base": '"Departure airport" should be a type of string',
-    "any.required": '"Departure airport" is a required field',
   }),
 
   hotel_category: Joi.string()
-    .valid("3star", "4star", "5star")
-    .required()
+    .valid("3_star", "4_star", "5_star", "2_star")
     .messages({
       "string.base": '"Hotel category" should be a type of string',
-      "any.required": '"Hotel category" is a required field',
-      "any.only": '"Hotel category" must be one of [3star, 4star, 5star]',
+      "any.only":
+        '"Hotel category" must be one of [3_star", "4_star", "5_star", "2_star"]',
     }),
 
-  departure_date: Joi.date().iso().required().messages({
+  departure_date: Joi.date().iso().messages({
     "date.base": '"Departure date" should be a valid date',
-    "any.required": '"Departure date" is a required field',
   }),
 
-  arrival_date: Joi.date().iso().required().messages({
+  arrival_date: Joi.date().iso().messages({
     "date.base": '"Arrival date" should be a valid date',
-    "any.required": '"Arrival date" is a required field',
   }),
 
-  nights_in_makkah: Joi.number().integer().positive().required().messages({
+  nights_in_makkah: Joi.number().integer().positive().messages({
     "number.base": '"Nights in Makkah" should be a number',
     "number.integer": '"Nights in Makkah" must be an integer',
     "number.positive": '"Nights in Makkah" must be a positive number',
-    "any.required": '"Nights in Makkah" is a required field',
   }),
 
-  nights_in_madinah: Joi.number().integer().positive().required().messages({
+  nights_in_madinah: Joi.number().integer().positive().messages({
     "number.base": '"Nights in Madinah" should be a number',
     "number.integer": '"Nights in Madinah" must be an integer',
     "number.positive": '"Nights in Madinah" must be a positive number',
-    "any.required": '"Nights in Madinah" is a required field',
   }),
 
-  number_of_passengers: Joi.number().integer().positive().required().messages({
+  number_of_passengers: Joi.number().integer().positive().messages({
     "number.base": '"Number of passengers" should be a number',
     "number.integer": '"Number of passengers" must be an integer',
     "number.positive": '"Number of passengers" must be a positive number',
-    "any.required": '"Number of passengers" is a required field',
   }),
 
-  children: Joi.number().integer().min(0).required().messages({
+  children: Joi.number().integer().min(0).messages({
     "number.base": '"Children" should be a number',
     "number.integer": '"Children" must be an integer',
     "number.min": '"Children" cannot be negative',
-    "any.required": '"Children" is a required field',
   }),
 
-  full_name: Joi.string().required().messages({
+  full_name: Joi.string().messages({
     "string.base": '"Full name" should be a type of string',
-    "any.required": '"Full name" is a required field',
   }),
 
-  contact_no: Joi.number().integer().positive().required().messages({
+  contact_no: Joi.number().integer().positive().messages({
     "number.base": '"Contact number" should be a number',
     "number.integer": '"Contact number" must be an integer',
     "number.positive": '"Contact number" must be a positive number',
-    "any.required": '"Contact number" is a required field',
   }),
 
-  email: Joi.string().email().required().messages({
+  email: Joi.string().email().messages({
     "string.base": '"Email" should be a type of string',
     "string.email": '"Email" must be a valid email',
-    "any.required": '"Email" is a required field',
   }),
-});
+
+  subject: Joi.string().messages({
+    "string.base": '"Subject" should be a type of string',
+  }),
+
+  status: Joi.string().valid("pending", "complete").messages({
+    "string.base": '"Status" should be a type of string',
+    "any.only": '"Status" must be one of [pending, complete]',
+  }),
+
+  type: Joi.string().valid("general", "contact").messages({
+    "string.base": '"Type" should be a type of string',
+    "any.only": '"Type" must be one of [general, contact]',
+  }),
+
+  your_message: Joi.string().messages({
+    "string.base": '"Your message" should be a type of string',
+  }),
+}).unknown({
+  allowUnknown: true,
+})
+
 
 const blog_form_validationSchema = Joi.object({
   title: Joi.string().required().messages({

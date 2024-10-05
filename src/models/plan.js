@@ -26,6 +26,11 @@ const planSchema = Schema({
     default: true,
     required: true,
   },
+  free_ziyarahs: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
   transport: {
     type: Boolean,
     default: true,
@@ -46,7 +51,7 @@ const planSchema = Schema({
   },
   hotels_rating: {
     type: String,
-    enum: ["3_star", "4_star", "5_star"],
+    enum: ["3_star", "4_star", "5_star", "2_star"],
   },
   visa_included: {
     type: Boolean,

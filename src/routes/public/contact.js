@@ -19,57 +19,71 @@ const router = express.Router();
  *             schema:
  *               type: object
  *               properties:
+ *                 full_name:
+ *                   type: string
+ *                   example: "Angelica Franks"
+ *                   description: Full name of the traveler
+ *                 contact_no:
+ *                   type: integer
+ *                   example: 1234567890
+ *                   description: Contact number of the traveler
+ *                 email:
+ *                   type: string
+ *                   format: email
+ *                   required: true
+ *                   example: "mipexotox@mailinator.com"
+ *                   description: Email address of the traveler
+ *                 subject:
+ *                   type: string
+ *                   example: "Inquiry about package"
+ *                   description: Subject of the contact form
  *                 departure_airport:
  *                   type: string
  *                   example: "Birmingham"
  *                   description: The airport from which the journey departs
  *                 hotel_category:
  *                   type: string
- *                   enum: [3star, 4star, 5star]
- *                   example: "3star"
+ *                   enum: [3_star, 4_star, 5_star, 2_star]
+ *                   example: "3_star"
  *                   description: Category of the hotel
  *                 departure_date:
  *                   type: string
  *                   format: date-time
- *                   example: "2009-10-30T00:00:00.000Z"
+ *                   example: "2024-01-10T00:00:00.000Z"
  *                   description: Date of departure in ISO 8601 format
  *                 arrival_date:
  *                   type: string
  *                   format: date-time
- *                   example: "1977-01-24T00:00:00.000Z"
+ *                   example: "2024-01-20T00:00:00.000Z"
  *                   description: Date of arrival in ISO 8601 format
  *                 nights_in_makkah:
  *                   type: integer
- *                   example: 98
+ *                   example: 5
  *                   description: Number of nights spent in Makkah
  *                 nights_in_madinah:
  *                   type: integer
- *                   example: 8
+ *                   example: 3
  *                   description: Number of nights spent in Madinah
  *                 number_of_passengers:
  *                   type: integer
- *                   example: 746
+ *                   example: 4
  *                   description: Total number of passengers
  *                 children:
  *                   type: integer
- *                   example: 52
+ *                   example: 2
  *                   description: Number of children in the group
- *                 full_name:
+ *                 type:
  *                   type: string
- *                   example: "Angelica Franks"
- *                   description: Full name of the traveler
- *                 contact_no:
+ *                   enum: [general, contact]
+ *                   example: "general"
+ *                   description: The type of contact (general or contact)
+ *                 your_message:
  *                   type: string
- *                   example: "1234567890"
- *                   description: Contact number of the traveler
- *                 email:
- *                   type: string
- *                   format: email
- *                   example: "mipexotox@mailinator.com"
- *                   description: Email address of the traveler
+ *                   example: "I would like to inquire about your travel package."
+ *                   description: Message or inquiry in the contact form
  *       responses:
  *         '201':
- *           description: Travel plan created successfully
+ *           description: Contact form created successfully
  *           content:
  *             application/json:
  *               schema:
@@ -77,8 +91,8 @@ const router = express.Router();
  *                 properties:
  *                   message:
  *                     type: string
- *                     example: "Travel plan created successfully"
- *                   plan_id:
+ *                     example: "Contact form created successfully"
+ *                   form_id:
  *                     type: string
  *                     example: "60f2c05396f3060015eb4d51"
  *         '400':
@@ -103,5 +117,6 @@ const router = express.Router();
  *                     example: "Internal server error"
  */
 router.post("/contacts", contactForm);
+
 
 export default router;

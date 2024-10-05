@@ -3,11 +3,20 @@ import { catchAsync } from "../../middleware/utils.js";
 
 //createBlog
 export const createBlog = catchAsync(async (req, res) => {
-
-  let check = await Blogs.find({ title: req.body.title });
-  if (check.length > 0) {
-    return res.status(409).json({ message: "Blog Already Exists" });
+  let { slug, title } = req.body;
+  if(!req.file){
+    return res.status(400).json({ error: "Image is required" });
   }
+  console.log(req.file);
+  let check = await Blogs.findOne({ title: title });
+  if (check) {
+    return res.status(409).json({ error: "Blog Already Exists" });
+  }
+  slug = title.toLowerCase();
+  slug = slug.split(" ");
+  slug = slug.slice(0, 2).join("-");
+  req.body.slug = slug;
+  req.body.image = req.file.filename;
   let blog = new Blogs(req.body);
   await blog.save();
   res.status(201).json({ message: "Blog Created Successfully" });
@@ -17,13 +26,16 @@ export const createBlog = catchAsync(async (req, res) => {
 export const deleteBlog = catchAsync(async (req, res) => {
   const blog = await Blogs.findByIdAndDelete(req.params.id);
   if (!blog) {
-    return res.status(404).json({ message: "Blog Not Found" });
+    return res.status(404).json({});
   }
-  res.status(200).json({ message: "Blog Deleted Successfully" });
+  res.status(200).json({});
 });
 
 //delete all Blogs
 export const deleteAllBlogs = catchAsync(async (req, res) => {
   await Blogs.deleteMany({});
-  res.status(200).json({ message: "All Blogs Deleted Successfully" });
+  res.status(200).json({});
 });
+
+//updateImages
+export const updateImages = catchAsync(async (req, res) => {});

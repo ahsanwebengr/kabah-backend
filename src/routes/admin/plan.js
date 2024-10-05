@@ -6,7 +6,7 @@ import {
   deletePlan,
   deleteAllPlans,
 } from "../../controllers/admin.js/plan.js"; // Fixed import path
-import { fileUploader } from "../../middleware/multer.js";
+import { createMulter } from "../../middleware/multer.js";
 const router = express.Router();
 
 /**
@@ -46,6 +46,10 @@ const router = express.Router();
  *                   type: boolean
  *                   description: "Whether flights are included"
  *                   example: true
+ *                 free_ziyarahs:
+ *                   type: boolean
+ *                   description: "free_ziyarahs are included"
+ *                   example: true
  *                 transport:
  *                   type: boolean
  *                   description: "Whether transport is included"
@@ -64,7 +68,7 @@ const router = express.Router();
  *                   example: 14
  *                 hotels_rating:
  *                   type: string
- *                   enum: ["3_star", "4_star", "5_star"]
+ *                   enum: ["3_star", "4_star", "5_star","2_star"]
  *                   description: "Hotel star rating"
  *                   example: "5_star"
  *                 visa_included:
@@ -146,7 +150,7 @@ const router = express.Router();
  *                       example: "Hotel Makkah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -180,7 +184,7 @@ const router = express.Router();
  *                       example: "Hotel Medinah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -276,7 +280,7 @@ router.post("/plans", createPlan);
  *       summary: Update images for a specific plan
  *       tags:
  *         - Admin
- *       description: Updates the hotel image for the plan using multipart form data.
+ *       description: Updates images for the specified plan using multipart form data.
  *       parameters:
  *         - name: id
  *           in: path
@@ -294,7 +298,19 @@ router.post("/plans", createPlan);
  *                 thumbnail:
  *                   type: string
  *                   format: binary
- *                   description: "The image to upload for the plan"
+ *                   description: The image to upload for the plan
+ *                 makkah_hotel_images:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                     format: binary
+ *                   description: The images for Makkah hotel
+ *                 medinah_hotel_images:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                     format: binary
+ *                   description: The images for Medinah hotel
  *       responses:
  *         '200':
  *           description: Image updated successfully
@@ -308,7 +324,7 @@ router.post("/plans", createPlan);
  *                     example: "Image updated successfully"
  *                   plan:
  *                     type: object
- *                     description: "The updated plan object"
+ *                     description: The updated plan object
  *         '404':
  *           description: Plan not found
  *           content:
@@ -320,12 +336,16 @@ router.post("/plans", createPlan);
  *                     type: string
  *                     example: "Plan not found"
  */
+
 router.put(
-  "/plan-media/:id",
-  fileUploader("thumbnail", "thumbnails"),
+  "/plans-media/:id",
+  createMulter("uploads").fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "makkah_hotel_images", maxCount: 10 },
+    { name: "medinah_hotel_images", maxCount: 10 },
+  ]),
   updateImages
 );
-
 
 /**
  * @swagger
@@ -371,6 +391,10 @@ router.put(
  *                   type: boolean
  *                   description: "Whether flights are included"
  *                   example: true
+ *                 free_ziyarahs:
+ *                   type: boolean
+ *                   description: "free_ziyarahs are included"
+ *                   example: true
  *                 transport:
  *                   type: boolean
  *                   description: "Whether transport is included"
@@ -389,7 +413,7 @@ router.put(
  *                   example: 14
  *                 hotels_rating:
  *                   type: string
- *                   enum: ["3_star", "4_star", "5_star"]
+ *                   enum: ["3_star", "4_star", "5_star","2_star"]
  *                   description: "Hotel star rating"
  *                   example: "5_star"
  *                 visa_included:
@@ -471,7 +495,7 @@ router.put(
  *                       example: "Hotel Makkah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -505,7 +529,7 @@ router.put(
  *                       example: "Hotel Medinah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -583,10 +607,7 @@ router.put(
  *                     type: string
  *                     example: "Plan not found"
  */
-router.put(
-  "/plans/:id",
-  updatePlan
-);
+router.put("/plans/:id", updatePlan);
 
 /**
  * @swagger

@@ -20,6 +20,10 @@ const blog_schema = Schema({
     type: String,
     required: true,
   },
+  slug:{
+    type: String,
+    required: true,
+  },
   cratedAt: {
     type: Date,
     default: Date.now,
