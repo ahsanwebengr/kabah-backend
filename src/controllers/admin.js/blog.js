@@ -3,9 +3,12 @@ import { catchAsync } from "../../middleware/utils.js";
 
 //createBlog
 export const createBlog = catchAsync(async (req, res) => {
-
-  let {slug,title} = req.body
-  let check = await Blogs.findOne({title: title});
+  let { slug, title } = req.body;
+  if(!req.file){
+    return res.status(400).json({ error: "Image is required" });
+  }
+  console.log(req.file);
+  let check = await Blogs.findOne({ title: title });
   if (check) {
     return res.status(409).json({ error: "Blog Already Exists" });
   }
@@ -13,9 +16,10 @@ export const createBlog = catchAsync(async (req, res) => {
   slug = slug.split(" ");
   slug = slug.slice(0, 2).join("-");
   req.body.slug = slug;
+  req.body.image = req.file.filename;
   let blog = new Blogs(req.body);
   await blog.save();
-  res.status(201).json({});
+  res.status(201).json({ message: "Blog Created Successfully" });
 });
 
 //deleteBlogs
@@ -33,8 +37,5 @@ export const deleteAllBlogs = catchAsync(async (req, res) => {
   res.status(200).json({});
 });
 
-
 //updateImages
-export const updateImages = catchAsync(async (req, res) => {
-  
-});
+export const updateImages = catchAsync(async (req, res) => {});

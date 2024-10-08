@@ -40,6 +40,7 @@ export const createPlan = catchAsync(async (req, res) => {
 // Updates images for a specific plan.
 
 export const updateImages = catchAsync(async (req, res) => {
+  console.log("Updating images", req.files)
   const planId = req.params.id;
 
   // Find the plan by ID
@@ -48,7 +49,12 @@ export const updateImages = catchAsync(async (req, res) => {
   if (!plan) {
     return res.status(404).json({ error: "Plan not found" });
   }
-
+    if (req.fileValidationError) {
+    return res.status(400).json({ error: req.fileValidationError });
+  }
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).json({ error: 'No files were uploaded.' });
+  }
   const { thumbnail, makkah_hotel_images, medinah_hotel_images } =
     req.files || {};
   const updateData = {

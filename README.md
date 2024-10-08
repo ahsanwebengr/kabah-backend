@@ -18,6 +18,8 @@
 
 # Create key pair for EC2 instance."You can use a key pair to securely connect to your instance. Ensure that you have access to the selected key pair before you launch the instance" .Put the name of the key pair and select the "RSA". Then the key pair file will be downloaded.Then select the created key pair.
 
+-
+
 # Step 4:
 
 # Network settings
@@ -122,3 +124,5 @@ server_name api.domain.com ;
 # -> then restart the nginx server to get the new configuration "sudo systemctl restart nginx " using this command
 
 # -> then Enable the site by creating a symbolic link: using this commend sudo ln -s /etc/nginx/sites-available/project.com /etc/nginx/sites-enabled/
+
+# -> youtub https://www.youtube.com/watch?v=Emn1rZXdWI4

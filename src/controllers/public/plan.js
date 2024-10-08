@@ -22,12 +22,11 @@ export const getPlans = catchAsync(async (req, res) => {
   }
   if (category && hotels_rating) {
     query = { category: category, hotels_rating: hotels_rating };
-    limit = limit ? parseInt(limit) : 12;
-    page = page ? parseInt(page) : 1;
   }
-  let plan = await Plans.find(query)
-    .limit(limit)
+ let plan = await Plans.find(query).limit(limit)
     .skip((page - 1) * limit);
+  
+
   let count = await Plans.countDocuments(query);
   plan = {
     pages: Math.ceil(count / limit),

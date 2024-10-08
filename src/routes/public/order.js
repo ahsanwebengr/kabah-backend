@@ -1,17 +1,17 @@
 import express from "express";
-import { contactForm } from "../../controllers/public/contactForm.js";
+import { createOrder } from "../../controllers/public/order.js";
 
 const router = express.Router();
 
 /**
  * @swagger
  * paths:
- *   /public/contacts:
+ *   /public/orders:
  *     post:
- *       summary: Create a contact form
+ *       summary: Create an order
  *       tags:
  *         - Public
- *       description: Endpoint to create a new contact
+ *       description: Endpoint to create a new order
  *       requestBody:
  *         required: true
  *         content:
@@ -30,60 +30,32 @@ const router = express.Router();
  *                 email:
  *                   type: string
  *                   format: email
- *                   required: true
  *                   example: "mipexotox@mailinator.com"
  *                   description: Email address of the traveler
- *                 subject:
- *                   type: string
- *                   example: "Inquiry about package"
- *                   description: Subject of the contact form
- *                 departure_airport:
- *                   type: string
- *                   example: "Birmingham"
- *                   description: The airport from which the journey departs
- *                 hotel_category:
- *                   type: string
- *                   enum: [3_star, 4_star, 5_star, 2_star]
- *                   example: "3_star"
- *                   description: Category of the hotel
  *                 departure_date:
  *                   type: string
  *                   format: date-time
  *                   example: "2024-01-10T00:00:00.000Z"
  *                   description: Date of departure in ISO 8601 format
- *                 arrival_date:
- *                   type: string
- *                   format: date-time
- *                   example: "2024-01-20T00:00:00.000Z"
- *                   description: Date of arrival in ISO 8601 format
- *                 nights_in_makkah:
- *                   type: integer
- *                   example: 5
- *                   description: Number of nights spent in Makkah
- *                 nights_in_madinah:
- *                   type: integer
- *                   example: 3
- *                   description: Number of nights spent in Madinah
- *                 number_of_passengers:
- *                   type: integer
- *                   example: 4
- *                   description: Total number of passengers
  *                 children:
  *                   type: integer
  *                   example: 2
- *                   description: Number of children in the group
- *                 type:
+ *                   description: Number of children 
+ *                 adults:
+ *                   type: integer
+ *                   example: 2
+ *                   description: Number of adults 
+ *                 plan_id:
  *                   type: string
- *                   enum: [price_qoute, contact]
- *                   example: "price_qoute"
- *                   description: The type of contact (price_qoute or contact)
- *                 your_message:
+ *                   example: "66faf2203c686cc08c4c7e74" 
+ *                   description: ID of the plan (MongoDB ObjectId)  
+*                 additional_info:
  *                   type: string
- *                   example: "I would like to inquire about your travel package."
- *                   description: Message or inquiry in the contact form
+ *                   example: "Please provide a vegetarian meal option."
+ *                   description: Additional information
  *       responses:
  *         '201':
- *           description: Contact form created successfully
+ *           description: Order created successfully
  *           content:
  *             application/json:
  *               schema:
@@ -91,7 +63,7 @@ const router = express.Router();
  *                 properties:
  *                   message:
  *                     type: string
- *                     example: "Contact form created successfully"
+ *                     example: "Order created successfully"
  *                   form_id:
  *                     type: string
  *                     example: "60f2c05396f3060015eb4d51"
@@ -116,6 +88,6 @@ const router = express.Router();
  *                     type: string
  *                     example: "Internal server error"
  */
-router.post("/contacts", contactForm);
+router.post("/orders", createOrder);
 
 export default router;

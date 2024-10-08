@@ -51,7 +51,7 @@ const planSchema = Schema({
   },
   hotels_rating: {
     type: String,
-    enum: ["3_star", "4_star", "5_star", "economy"],
+    enum: ["3_star", "4_star", "5_star", "2_star"],
   },
   visa_included: {
     type: Boolean,

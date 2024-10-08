@@ -68,7 +68,7 @@ const router = express.Router();
  *                   example: 14
  *                 hotels_rating:
  *                   type: string
- *                   enum: ["3_star", "4_star", "5_star","economy"]
+ *                   enum: ["3_star", "4_star", "5_star","2_star"]
  *                   description: "Hotel star rating"
  *                   example: "5_star"
  *                 visa_included:
@@ -150,7 +150,7 @@ const router = express.Router();
  *                       example: "Hotel Makkah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star","economy"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -184,7 +184,7 @@ const router = express.Router();
  *                       example: "Hotel Medinah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star","economy"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -413,7 +413,7 @@ router.put(
  *                   example: 14
  *                 hotels_rating:
  *                   type: string
- *                   enum: ["3_star", "4_star", "5_star","economy"]
+ *                   enum: ["3_star", "4_star", "5_star","2_star"]
  *                   description: "Hotel star rating"
  *                   example: "5_star"
  *                 visa_included:
@@ -495,7 +495,7 @@ router.put(
  *                       example: "Hotel Makkah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star","economy"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean
@@ -529,7 +529,7 @@ router.put(
  *                       example: "Hotel Medinah"
  *                     rating:
  *                       type: string
- *                       enum: ["3_star", "4_star", "5_star","economy"]
+ *                       enum: ["3_star", "4_star", "5_star","2_star"]
  *                       description: "Hotel star rating"
  *                     wheel_chair_friendly:
  *                       type: boolean

@@ -1,27 +1,27 @@
 import express from "express";
-import { getPlan, getPlans } from "../../controllers/public/plan.js";
+import { getBlogById, getBlogs } from "../../controllers/public/blog.js";
 
 const router = express.Router();
 
 /**
  * @swagger
  * paths:
- *   /public/plans/{id}:
+ *   /public/blogs/{id}:
  *     get:
- *       summary: Retrieve a specific plan
+ *       summary: Retrieve a specific blog
  *       tags:
  *         - Public
- *       description: Fetches the details of a specific plan by its ID.
+ *       description: Fetches the details of a specific blog by its ID.
  *       parameters:
  *         - name: id
  *           in: path
  *           required: true
- *           description: The ID of the plan to retrieve.
+ *           description: The ID of the blog to retrieve.
  *           schema:
  *             type: string
  *       responses:
  *         '200':
- *           description: Plan retrieved successfully
+ *           description: Blog retrieved successfully
  *           content:
  *             application/json:
  *               schema:
@@ -29,11 +29,11 @@ const router = express.Router();
  *                 properties:
  *                   message:
  *                     type: string
- *                   plan:
+ *                   blog:
  *                     type: object
- *                     # Define the plan structure according to your model
+ *                     # Define the blog structure according to your model
  *         '404':
- *           description: Plan not found
+ *           description: Blog not found
  *           content:
  *             application/json:
  *               schema:
@@ -42,17 +42,17 @@ const router = express.Router();
  *                   message:
  *                     type: string
  */
-router.get("/plans/:id", getPlan);
+router.get("/blogs/:id", getBlogById);
 
 /**
  * @swagger
  * paths:
- *   /public/plans:
+ *   /public/blogs:
  *     get:
- *       summary: Retrieve a list of plans
+ *       summary: Retrieve a list of blogs
  *       tags:
  *         - Public
- *       description: Fetches a paginated list of plans with optional filtering by category, and pagination parameters for limit and page number.
+ *       description: List of all blogs
  *       parameters:
  *         - name: page
  *           in: query
@@ -64,27 +64,13 @@ router.get("/plans/:id", getPlan);
  *         - name: limit
  *           in: query
  *           required: false
- *           description: The number of plans to retrieve per page (default is 12).
+ *           description: The number of blogs to retrieve per page (default is 12).
  *           schema:
  *             type: integer
  *             example: 12
- *         - name: category
- *           in: query
- *           required: false
- *           description:  plans by category hajj or umrah.
- *           schema:
- *             type: string
- *             example: "umrah"
- *         - name: hotels_rating
- *           in: query
- *           required: false
- *           description:  plans by hotels_rating "3_star", "4_star", "5_star", "2_star".
- *           schema:
- *             type: string
- *             example: "3_star"
  *       responses:
  *         '200':
- *           description: Plans retrieved successfully
+ *           description: Blogs retrieved successfully
  *           content:
  *             application/json:
  *               schema:
@@ -92,7 +78,7 @@ router.get("/plans/:id", getPlan);
  *                 properties:
  *                   message:
  *                     type: string
- *                   plan:
+ *                   blogs:
  *                     type: object
  *                     properties:
  *                       pages:
@@ -100,12 +86,12 @@ router.get("/plans/:id", getPlan);
  *                         description: Total number of pages available
  *                       total:
  *                         type: integer
- *                         description: Total number of plans available
- *                       plans:
+ *                         description: Total number of blogs available
+ *                       blogList:
  *                         type: array
  *                         items:
  *                           type: object
- *                           # Define the structure of the individual plan object according to your model
+ *                           # Define the structure of individual blog objects according to your model
  *         '500':
  *           description: Internal server error
  *           content:
@@ -116,6 +102,6 @@ router.get("/plans/:id", getPlan);
  *                   message:
  *                     type: string
  */
-router.get("/plans", getPlans);
+router.get("/blogs", getBlogs);
 
 export default router;

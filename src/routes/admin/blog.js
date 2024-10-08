@@ -19,7 +19,7 @@ const router = express.Router();
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -37,8 +37,8 @@ const router = express.Router();
  *                 example: "I visited several places and enjoyed..."
  *               image:
  *                 type: string
- *                 description: The URL of the blog's image.
- *                 example: "https://example.com/image.jpg"
+ *                 format: binary
+ *                 description: The image file of the blog (upload).
  *               slug:
  *                 type: string
  *                 description: A URL-friendly identifier for the blog.
@@ -94,7 +94,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "An unexpected error occurred"
  */
-router.post("/blogs", createBlog);
+router.post("/blogs", fileUploader("image", "blogs"), createBlog);
 
 /**
  * @swagger
@@ -179,14 +179,11 @@ router.post("/blogs", createBlog);
  *                   type: string
  *                   example: "Internal server error"
  */
-router.put(
-  "/blog-media/:id",
-  updateImages
-);
+router.put("/blog-media/:id", updateImages);
 
 /**
  * @swagger
- * /admin/blog/{id}:
+ * /admin/blogs/{id}:
  *   delete:
  *     summary: Delete a specific blog
  *     tags: [Admin]
@@ -230,7 +227,7 @@ router.put(
  *                   type: string
  *                   example: "Internal server error"
  */
-router.delete("/blog/:id", deleteBlog);
+router.delete("/blogs/:id", deleteBlog);
 
 /**
  * @swagger

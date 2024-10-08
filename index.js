@@ -8,30 +8,31 @@ database();
 config();
 app.use("/api", swaggerServe, swaggerSetup);
 let port = process.env.PORT || 8080;
-// http
-//   .createServer(app)
-//   .listen(port, () => console.log("Server listening on port: " + port));
 
-const server = http.createServer(app);
-const PORT = process.env.PORT || 7070;
-const HOST = "0.0.0.0";
+http
+  .createServer(app)
+  .listen(port, () => console.log("Server listening on port: " + port));
 
-// Start server on local network
+// const server = http.createServer(app);
+// const PORT = process.env.PORT || 7070;
+// const HOST = "0.0.0.0";
 
-// Function to get the local network IP address
-const getLocalNetworkIP = () => {
-  const interfaces = os.networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === "IPv4" && !iface.internal) {
-        return iface.address;
-      }
-    }
-  }
-  return "localhost"; // Fallback to localhost if no network IP found
-};
+// // Start server on local network
 
-server.listen(PORT, HOST, () => {
-  const address = getLocalNetworkIP();
-  console.log(`Server listening on http://${address}:${PORT}`);
-});
+// // Function to get the local network IP address
+// const getLocalNetworkIP = () => {
+//   const interfaces = os.networkInterfaces();
+//   for (const name of Object.keys(interfaces)) {
+//     for (const iface of interfaces[name]) {
+//       if (iface.family === "IPv4" && !iface.internal) {
+//         return iface.address;
+//       }
+//     }
+//   }
+//   return "localhost"; // Fallback to localhost if no network IP found
+// };
+
+// server.listen(PORT, HOST, () => {
+//   const address = getLocalNetworkIP();
+//   console.log(`Server listening on http://${address}:${PORT}`);
+// });

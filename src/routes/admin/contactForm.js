@@ -33,10 +33,10 @@ const router = express.Router();
  *           example: 12
  *         - name: type
  *           in: query
- *           description: The type of contact (e.g., "general", "hajj", "umrah").
+ *           description: The type of contact (e.g., "price_qoute","contact").
  *           required: false
  *           type: string
- *           example: "general"
+ *           example: "price_qoute"
  *       responses:
  *         200:
  *           description: Successfully retrieved contacts
@@ -84,7 +84,6 @@ const router = express.Router();
  */
 router.get("/contacts", getContactForm);
 
-
 /**
  * @swagger
  * paths:
@@ -129,7 +128,6 @@ router.get("/contacts", getContactForm);
  */
 router.get("/contacts/:id", contactForm);
 
-
 /**
  * @swagger
  * paths:
@@ -142,10 +140,10 @@ router.get("/contacts/:id", contactForm);
  *       parameters:
  *         - name: type
  *           in: query
- *           description: The type of contacts to delete (e.g., "general", "hajj", "umrah"). If not provided, all contacts will be deleted.
+ *           description: The type of contacts to delete (e.g., "price_qoute","contact"). If not provided, all contacts will be deleted.
  *           required: false
  *           type: string
- *           example: "general"
+ *           example: "price_qoute"
  *       responses:
  *         200:
  *           description: Successfully deleted contacts
@@ -189,7 +187,7 @@ router.delete("/contacts", deleteAllContacts);
  *           description: The ID of the contact to delete.
  *           required: true
  *           type: string
- *           example: "60d21b4667d0d8992e610c85"  
+ *           example: "60d21b4667d0d8992e610c85"
  *       responses:
  *         200:
  *           description: Successfully deleted the contact
