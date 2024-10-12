@@ -1,5 +1,5 @@
 
-
+import Admins from "../models/admin.js";
 import { fileURLToPath } from "url";
 // ************************ send token ******************************
 export const sendToken = async (res, user, message) => {

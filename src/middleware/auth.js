@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 
-import Users from "../models/auth.js";
 import Admins from "../models/admin.js";
 import {
   sendError,
@@ -50,6 +49,23 @@ export const isAuthorize = (roles = []) => {
     return async (req, res, next) => {
       if (!roles.includes(req.user.role)) {
         return UnauthorizedError(res, false, "Unauthorized to access");
+      }
+      return next();
+    };
+  } catch (error) {
+    return sendError(res, error);
+  }
+};
+
+export const isAuthorization = (roles = []) => {
+  try {
+    return async (req, res, next) => {
+      if (!req.user) {
+        return sendResponse(res, false, "You must be logged in");
+      }
+
+      if (!roles.includes(req.user.role)) {
+        return sendResponse(res, false, "Unauthorized to access");
       }
       return next();
     };

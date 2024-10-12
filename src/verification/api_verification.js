@@ -1,5 +1,48 @@
 import Joi from 'joi';
 
+
+const adminRegisterValidation = Joi.object({
+  name: Joi.string().required().messages({
+    "string.empty": "Name is required",
+  }),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "Email Address is required",
+      "string.email": "Email Address must be a valid email",
+    }),
+  password: Joi.string().min(6).max(30).required().messages({
+    "string.min": "Password must be at least {#limit} characters long.",
+    "string.max": "Password must be no more than {#limit} characters long.",
+    "string.empty": "Password cannot be an empty field.",
+    "any.required": "Password is required.",
+  }),
+  repeat_password: Joi.string().valid(Joi.ref("password")).required().messages({
+    "any.only": "Passwords must match",
+    "any.required": "Repeat password is required.",
+  }),
+  phone: Joi.string().required().messages({
+    "string.empty": "Phone Number is required",
+  }),
+  isDelete: Joi.boolean().optional(),
+  // Additional fields can be added here if needed
+});
+
+const loginValidation = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .messages({
+      "string.email": "Email must be a valid email address.",
+      "string.empty": "Email cannot be an empty field.",
+    }),
+  password: Joi.string().min(3).max(30).required().messages({
+    "string.min": "Password must be at least {#limit} characters long.",
+    "string.max": "Password must be no more than {#limit} characters long.",
+    "string.empty": "Password cannot be an empty field.",
+    "any.required": "Password is required.",
+  }),
+});
 // Plan verification schema
 const planVerificationSchema = Joi.object({
   visa_fee: Joi.boolean().default(true),
@@ -180,6 +223,8 @@ const order_validationSchema = Joi.object({
   additional_info: Joi.string().optional(),
 });
 export {
+  adminRegisterValidation,
+  loginValidation,
   planVerificationSchema,
   order_validationSchema,
   contact_form_validationSchema,
