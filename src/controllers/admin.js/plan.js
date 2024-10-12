@@ -4,11 +4,6 @@ import { catchAsync, calculateDuration } from "../../middleware/utils.js";
 
 //createPlan
 export const createPlan = catchAsync(async (req, res) => {
-  // const { error, value } = planVerificationSchema.validate(req.body);
-  // if (error) {
-  //   return res.status(400).json({ error: error.details[0].message });
-  // }
-
   let check = await Plans.find({ heading: req.body.heading });
   if (check.length > 0) {
     return res.status(409).json({ error: "Plan Already Exists" });

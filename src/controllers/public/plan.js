@@ -1,13 +1,13 @@
-import Plans from '../../models/plan.js';
-import { catchAsync } from '../../middleware/utils.js';
+import Plans from "../../models/plan.js";
+import { catchAsync } from "../../middleware/utils.js";
 
 //getPlan
 export const getPlan = catchAsync(async (req, res) => {
   const plan = await Plans.findById(req.params.id);
   if (!plan) {
-    return res.status(404).json({ error: 'Plan Not Found' });
+    return res.status(404).json({ error: "Plan Not Found" });
   }
-  res.status(200).json({ message: 'Plan Get Successfully', plan });
+  res.status(200).json({ message: "Plan Get Successfully", plan });
 });
 
 //getPlans
@@ -23,9 +23,9 @@ export const getPlans = catchAsync(async (req, res) => {
   if (category && hotels_rating) {
     query = { category: category, hotels_rating: hotels_rating };
   }
-  let plan = await Plans.find(query)
-    .limit(limit)
+ let plan = await Plans.find(query).limit(limit)
     .skip((page - 1) * limit);
+  
 
   let count = await Plans.countDocuments(query);
   plan = {
@@ -34,5 +34,5 @@ export const getPlans = catchAsync(async (req, res) => {
     plans: plan,
   };
 
-  return res.status(200).json({ plan, message: 'Plans Get Successfully' });
+  return res.status(200).json({ plan, message: "Plans Get Successfully" });
 });

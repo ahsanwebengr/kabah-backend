@@ -21,7 +21,7 @@ const router = express.Router();
  *               properties:
  *                 full_name:
  *                   type: string
- *                   example: "John Doe"
+ *                   example: "Angelica Franks"
  *                   description: Full name of the traveler
  *                 contact_no:
  *                   type: integer

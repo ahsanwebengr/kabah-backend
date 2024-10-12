@@ -2,8 +2,10 @@ import express from 'express';
 import {
   getContactForm,
   contactForm,
+  updateContacts,
   deleteAllContacts,
   deleteContact,
+  stats,
 } from '../../controllers/admin.js/contactForm.js';
 const router = express.Router();
 
@@ -131,6 +133,66 @@ router.get('/contacts/:id', contactForm);
 /**
  * @swagger
  * paths:
+ *   /admin/contacts/{id}:
+ *     put:
+ *       summary: Update a contact's status
+ *       tags:
+ *         - Admin
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           description: The ID of the contact to update
+ *           schema:
+ *             type: string
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: The new status for the contact
+ *                   example: "complete"
+ *       responses:
+ *         '200':
+ *           description: Contact updated successfully
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *                     example: "Contact Updated Successfully"
+ *         '404':
+ *           description: Contact not found
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
+ *                     example: "Contact Not Found"
+ *         '400':
+ *           description: Invalid request
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
+ *                     example: "Invalid request"
+ */
+router.put('/contacts/:id', updateContacts);
+
+/**
+ * @swagger
+ * paths:
  *   /admin/contacts:
  *     delete:
  *       summary: Delete all contacts
@@ -215,4 +277,44 @@ router.delete('/contacts', deleteAllContacts);
  *                 example: "Internal Server Error"
  */
 router.delete('/contacts/:id', deleteContact);
+
+/**
+ * @swagger
+ * paths:
+ *   /admin/stats:
+ *     get:
+ *       summary: Retrieve statistics
+ *       tags:
+ *         - Admin
+ *       responses:
+ *         200:
+ *           description: Successful retrieval of statistics
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   totalContacts:
+ *                     type: integer
+ *                   completeContacts:
+ *                     type: integer
+ *                   pendingContacts:
+ *                     type: integer
+ *                   resolvedContacts:
+ *                     type: integer
+ *                   totalBlogs:
+ *                     type: integer
+ *                   totalOrders:
+ *                     type: integer
+ *                   totalHajjPlans:
+ *                     type: integer
+ *                   totalUmrahPlans:
+ *                     type: integer
+ *                   totalPlans:
+ *                     type: integer
+ *         500:
+ *           description: Internal server error
+ */
+router.get('/stats', stats);
+
 export default router;

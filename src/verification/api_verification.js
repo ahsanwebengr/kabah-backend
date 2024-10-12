@@ -162,8 +162,26 @@ const blog_form_validationSchema = Joi.object({
     'any.required': '"content" is a required field',
   }),
 });
+
+const order_validationSchema = Joi.object({
+  full_name: Joi.string().required(),
+
+  plan_id: Joi.string().length(24).required(),
+
+  email: Joi.string().email().required(),
+
+  contact_no: Joi.number().required(),
+
+  departure_date: Joi.date().required(),
+
+  children: Joi.number().integer().required(),
+
+  adults: Joi.number().integer().required(),
+  additional_info: Joi.string().optional(),
+});
 export {
   planVerificationSchema,
+  order_validationSchema,
   contact_form_validationSchema,
   blog_form_validationSchema,
 };
