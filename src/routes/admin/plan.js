@@ -8,6 +8,7 @@ import {
 } from "../../controllers/admin.js/plan.js"; // Fixed import path
 import { createMulter } from "../../middleware/multer.js";
 const router = express.Router();
+import { isAdmin } from "../../middleware/auth.js";
 
 /**
  * @swagger
@@ -270,7 +271,7 @@ const router = express.Router();
  *                     example: "An unexpected error occurred"
  */
 
-router.post("/plans", createPlan);
+router.post("/plans",isAdmin, createPlan);
 
 /**
  * @swagger
@@ -344,6 +345,7 @@ router.put(
     { name: "makkah_hotel_images", maxCount: 10 },
     { name: "medinah_hotel_images", maxCount: 10 },
   ]),
+  isAdmin,
   updateImages
 );
 
@@ -607,7 +609,7 @@ router.put(
  *                     type: string
  *                     example: "Plan not found"
  */
-router.put("/plans/:id", updatePlan);
+router.put("/plans/:id", isAdmin,updatePlan);
 
 /**
  * @swagger
@@ -654,7 +656,7 @@ router.put("/plans/:id", updatePlan);
  *                   message:
  *                     type: string
  */
-router.delete("/plans/:id", deletePlan);
+router.delete("/plans/:id",isAdmin, deletePlan);
 
 /**
  * @swagger
@@ -685,6 +687,6 @@ router.delete("/plans/:id", deletePlan);
  *                   message:
  *                     type: string
  */
-router.delete("/plans", deleteAllPlans);
+router.delete("/plans",isAdmin, deleteAllPlans);
 
 export default router;

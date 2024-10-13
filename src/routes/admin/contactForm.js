@@ -7,6 +7,8 @@ import {
   deleteContact,
   stats,
 } from '../../controllers/admin.js/contactForm.js';
+import { isAdmin } from "../../middleware/auth.js";
+
 const router = express.Router();
 
 /**
@@ -84,7 +86,7 @@ const router = express.Router();
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.get('/contacts', getContactForm);
+router.get('/contacts',isAdmin, getContactForm);
 
 /**
  * @swagger
@@ -128,7 +130,7 @@ router.get('/contacts', getContactForm);
  *              message:
  *                type: string
  */
-router.get('/contacts/:id', contactForm);
+router.get('/contacts/:id',isAdmin, contactForm);
 
 /**
  * @swagger
@@ -188,7 +190,7 @@ router.get('/contacts/:id', contactForm);
  *                     type: string
  *                     example: "Invalid request"
  */
-router.put('/contacts/:id', updateContacts);
+router.put('/contacts/:id',isAdmin, updateContacts);
 
 /**
  * @swagger
@@ -232,7 +234,7 @@ router.put('/contacts/:id', updateContacts);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete('/contacts', deleteAllContacts);
+router.delete('/contacts',isAdmin, deleteAllContacts);
 
 /**
  * @swagger
@@ -276,7 +278,7 @@ router.delete('/contacts', deleteAllContacts);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete('/contacts/:id', deleteContact);
+router.delete("/contacts/:id", isAdmin,deleteContact);
 
 /**
  * @swagger
@@ -315,6 +317,6 @@ router.delete('/contacts/:id', deleteContact);
  *         500:
  *           description: Internal server error
  */
-router.get('/stats', stats);
+router.get('/stats',isAdmin, stats);
 
 export default router;

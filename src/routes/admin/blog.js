@@ -7,7 +7,7 @@ import {
   deleteAllBlogs,
 } from "../../controllers/admin.js/blog.js";
 import { fileUploader } from "../../middleware/multer.js";
-
+import { isAdmin } from "../../middleware/auth.js";
 const router = express.Router();
 
 /**
@@ -88,7 +88,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "An unexpected error occurred"
  */
-router.post("/blogs", fileUploader("image", "blogs"), createBlog);
+router.post("/blogs", fileUploader("image", "blogs"), isAdmin,createBlog);
 
 /**
  * @swagger
@@ -185,7 +185,7 @@ router.post("/blogs", fileUploader("image", "blogs"), createBlog);
  *                   type: string
  *                   example: "An unexpected error occurred"
  */
-router.put("/blogs/:id", fileUploader("image", "blogs"), updateBlog);
+router.put("/blogs/:id", fileUploader("image", "blogs"),isAdmin, updateBlog);
 
 
 /**
@@ -268,7 +268,7 @@ router.put("/blogs/:id", fileUploader("image", "blogs"), updateBlog);
  *                   type: string
  *                   example: "Internal server error"
  */
-router.put("/blog-media/:id", updateImages);
+router.put("/blog-media/:id",isAdmin, updateImages);
 
 /**
  * @swagger
@@ -316,7 +316,7 @@ router.put("/blog-media/:id", updateImages);
  *                   type: string
  *                   example: "Internal server error"
  */
-router.delete("/blog/:id", deleteBlog);
+router.delete("/blog/:id",isAdmin, deleteBlog);
 
 /**
  * @swagger
@@ -347,6 +347,6 @@ router.delete("/blog/:id", deleteBlog);
  *                   type: string
  *                   example: "Internal server error"
  */
-router.delete("/blogs", deleteAllBlogs);
+router.delete("/blogs", isAdmin,deleteAllBlogs);
 
 export default router;

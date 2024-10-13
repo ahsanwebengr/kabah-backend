@@ -6,7 +6,7 @@ import {
   getOrderById,
 } from "../../controllers/admin.js/order.js"; // Adjust the path as needed
 const router = express.Router();
-
+import { isAdmin } from "../../middleware/auth.js";
 /**
  * @swagger
  * paths:
@@ -80,7 +80,7 @@ const router = express.Router();
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.get("/orders", getOrders);
+router.get("/orders", isAdmin,getOrders);
 
 
 
@@ -134,7 +134,7 @@ router.get("/orders", getOrders);
  *                 type: string
  *                 example: "Order not found."
  */
-router.get("/orders/:id", getOrderById);
+router.get("/orders/:id",isAdmin, getOrderById);
 
 /**
  * @swagger
@@ -163,7 +163,7 @@ router.get("/orders/:id", getOrderById);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete("/orders", deleteAllOrders);
+router.delete("/orders",isAdmin, deleteAllOrders);
 
 /**
  * @swagger
@@ -207,6 +207,6 @@ router.delete("/orders", deleteAllOrders);
  *                 type: string
  *                 example: "Internal Server Error"
  */
-router.delete("/orders/:id", deleteOrderById);
+router.delete("/orders/:id",isAdmin, deleteOrderById);
 
 export default router;

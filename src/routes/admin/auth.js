@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { isAuthorize, isAdmin } from "../../middleware/auth.js";
+import {  isAdmin } from "../../middleware/auth.js";
 import {
   register,
   login,
