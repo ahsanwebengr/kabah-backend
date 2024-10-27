@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Travel Information</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #4caf50;
+        color: #fff;
+      }
+      h2 {
+        color: #333;
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Your Travel Information</h2>
+      <table>
+        <tr>
+          <th>Departure Airport</th>
+          <td><%= order.departure_airport %></td>
+        </tr>
+        <tr>
+          <th>Hotels Category</th>
+          <td><%= order.hotel_category %></td>
+        </tr>
+        <tr>
+          <th>Departure Date</th>
+          <td><%= order.departure_date %></td>
+        </tr>
+        <tr>
+          <th>Arrival Date</th>
+          <td><%= order.arrival_date %></td>
+        </tr>
+        <tr>
+          <th>Nights in Makkah</th>
+          <td><%= order.nights_in_makkah %></td>
+        </tr>
+        <tr>
+          <th>Nights in Madinah</th>
+          <td><%= order.nights_in_madinah %></td>
+        </tr>
+        <tr>
+          <th>No. of Passengers</th>
+          <td><%= order.number_of_passengers %></td>
+        </tr>
+        <tr>
+          <th>Children</th>
+          <td><%= order.children %></td>
+        </tr>
+        <tr>
+          <th>Full Name</th>
+          <td><%= order.full_name%></td>
+        </tr>
+        <tr>
+          <th>Contact No.</th>
+          <td><%= order.contact_no %></td>
+        </tr>
+        <tr>
+          <th>subject</th>
+          <td><%= order.subject %></td>
+        </tr>
+        <tr>
+          <th>hotel_category</th>
+          <td><%= order.hotel_category %></td>
+        </tr>
+        <tr>
+          <th>Email Address</th>
+          <td><%= order.email %></td>
+        </tr>
+        <tr>
+          <th>Email Address</th>
+          <td><%= order.email %></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,10 @@
-
 import Admins from "../models/admin.js";
+import nodemailer from "nodemailer";
+import path from "path";
+import fs from "fs/promises";
+import { dirname } from "path";
+import ejs from "ejs";
+
 import { fileURLToPath } from "url";
 // ************************ send token ******************************
 export const sendToken = async (res, user, message) => {
@@ -25,17 +30,26 @@ export const sendToken = async (res, user, message) => {
 };
 
 // ************************ file Reader ******************************
-export const fileReader = async (file) => {
+export const fileReader = async (file, order) => {
+  console.log("🚀 ~ fileReader ~ file:", file);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const filePath = path.resolve(__dirname, file);
+
   try {
-    const data = await fs.readFile(filePath, "utf8");
-    const result = JSON.parse(data);
-    return result;
-  } catch (error) {
-    console.log("Error is ", error.message);
-    throw new Error("Error reading the file");
+    // Read the HTML file
+    let emailFile = await fs.readFile(filePath, "utf8");
+    console.log("🚀 ~ fileReader ~ emailFile:", emailFile);
+
+    // Compile the EJS template
+    const compiledTemplate = ejs.compile(emailFile);
+
+    // Render the template with the order data
+    emailFile = compiledTemplate({ order });
+
+    return emailFile;
+  } catch (err) {
+    throw new Error("Error reading or compiling the file: " + err.message);
   }
 };
 
@@ -47,13 +61,6 @@ export const catchAsync = (fn) => (req, res, next) => {
     res.status(500).json({ message: err.message });
   });
 };
-
-
-
-
-
-
-
 
 // ************************ admin send token ***************************
 export const adminSendToken = async (res, user, message) => {
@@ -78,10 +85,40 @@ export const adminSendToken = async (res, user, message) => {
   }
 };
 
-export const calculateDuration = function calculateDuration( from_date, to_date ) {
+export const calculateDuration = function calculateDuration(
+  from_date,
+  to_date
+) {
   const fromDate = new Date(from_date);
   const toDate = new Date(to_date);
   const durationInMillis = toDate - fromDate;
   const days = Math.floor(durationInMillis / (1000 * 60 * 60 * 24));
   return days;
-}
+};
+
+export const sendEmail = async function sendEmail(to, body) {
+  try {
+    const auth = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.FROM_EMAIL,
+        pass: process.env.PASS,
+      },
+    });
+
+    const message = {
+      from: process.env.FROM_EMAIL,
+      to: to,
+      subject: " You receive  New contact",
+      html: body,
+    };
+
+    auth.sendMail(message, (error, emailResp) => {
+      if (error) throw error;
+      console.log("emial succefull send");
+    });
+  } catch (error) {
+    console.error("Error occurred while sending email:", error);
+    throw error;
+  }
+};

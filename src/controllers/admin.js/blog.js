@@ -7,7 +7,6 @@ export const createBlog = catchAsync(async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "Image is required" });
   }
-  console.log(req.file);
   let check = await Blogs.findOne({ title: title });
   if (check) {
     return res.status(409).json({ error: "Blog Already Exists" });

@@ -1,6 +1,13 @@
 import Contact from "../../models/contactForm.js";
 import { contact_form_validationSchema } from "../../verification/api_verification.js";
-import { catchAsync, calculateDuration } from "../../middleware/utils.js";
+
+import {
+  catchAsync,
+  sendEmail,
+  fileReader,
+  calculateDuration,
+} from "../../middleware/utils.js";
+
 
 export const contactForm = catchAsync(async (req, res) => {
   const { error, value } = contact_form_validationSchema.validate(req.body);
@@ -12,5 +19,10 @@ export const contactForm = catchAsync(async (req, res) => {
   value.duration = duration;
   let contact = new Contact(value);
   await contact.save();
+
+  let emailBody = await fileReader("../../priceForm.html", contact);
+  //console.log("🚀 ~ createOrder ~ res:", res)
+  let toEmail="danishriazprogramer@gmail.com"
+  await sendEmail(toEmail,emailBody);
   res.status(201).json({ message: "Contact Created Successfully" });
 });

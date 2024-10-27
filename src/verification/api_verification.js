@@ -222,6 +222,38 @@ const order_validationSchema = Joi.object({
   adults: Joi.number().integer().required(),
   additional_info: Joi.string().optional(),
 });
+
+const flightsValidationSchema = Joi.object({
+  from: Joi.string().required().messages({
+    "string.base": `"from" should be a type of 'text'`,
+    "string.empty": `"from" cannot be an empty field`,
+    "any.required": `"from" is a required field`,
+  }),
+
+  to: Joi.string().required().messages({
+    "string.base": `"to" should be a type of 'text'`,
+    "string.empty": `"to" cannot be an empty field`,
+    "any.required": `"to" is a required field`,
+  }),
+  airline: Joi.string().required().messages({
+    "string.base": `"airline" should be a type of 'text'`,
+    "string.empty": `"airline" cannot be an empty field`,
+    "any.required": `"airline" is a required field`,
+  }),
+  price: Joi.number().positive().required().messages({
+    "number.base": `"price" should be a type of 'number'`,
+    "number.positive": `"price" must be a positive number`,
+    "any.required": `"price" is a required field`,
+  }),
+
+  flightsNumber: Joi.number().integer().positive().required().messages({
+    "number.base": `"flightsNumber" should be a type of 'number'`,
+    "number.integer": `"flightsNumber" must be an integer`,
+    "number.positive": `"flightsNumber" must be a positive number`,
+    "any.required": `"flightsNumber" is a required field`,
+  }),
+});
+
 export {
   adminRegisterValidation,
   loginValidation,
@@ -229,4 +261,5 @@ export {
   order_validationSchema,
   contact_form_validationSchema,
   blog_form_validationSchema,
+  flightsValidationSchema,
 };
