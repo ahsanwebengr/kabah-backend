@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Contact Information</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #4caf50;
+        color: #fff;
+      }
+      h2 {
+        color: #333;
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Your Contact Information</h2>
+      <table>
+        <tr>
+          <th>Full Name </th>
+          <td><%= order.full_name %></td>
+        </tr>
+        <tr>
+          <th>Contact No </th>
+          <td><%= order.contact_no %></td>
+        </tr>
+        <tr>
+          <th>Email Address </th>
+          <td><%= order.email %></td>
+        </tr>
+        <tr>
+          <th>Subject </th>
+          <td><%= order.subject %></td>
+        </tr>
+        <tr>
+          <th>Your Message</th>
+          <td><%= order.message %></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

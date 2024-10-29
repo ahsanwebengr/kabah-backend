@@ -22,3 +22,9 @@ const flytesSchema = mongoose.Schema({
   },
 });
 export default model("flights", flytesSchema);
+
+
+
+
+
+

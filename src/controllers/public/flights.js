@@ -12,17 +12,20 @@ export const getFlightsById = catchAsync(async (req, res) => {
 
 // get flights
 export const getFlights = catchAsync(async (req, res) => {
-  let { page, limit, category } = req.query;
+  let { page, limit,from ,to } = req.query;
+     to = to.toLowerCase().trim();
+     from = from.toLowerCase().trim();
   let query = {};
-  if (category) {
-    query.category = category;
+  if(from&&to) {
+    query = {from : from, to : to}
   }
   limit = limit ? parseInt(limit) : 12;
   page = page ? parseInt(page) : 1;
 
   let plan = await Flights.find(query)
     .limit(limit)
-    .skip((page - 1) * limit);
+    .skip((page - 1) * limit)
+    //.sort({from:1})
   let count = await Flights.countDocuments(query);
   plan = {
     pages: Math.ceil(count / limit),

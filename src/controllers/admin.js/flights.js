@@ -7,6 +7,8 @@ export const createFlights = catchAsync(async (req, res) => {
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
+   value.to= value.to.toLowerCase().trim();
+   value.from = value.from.toLowerCase().trim();
   let fly = new Flights(value);
   await fly.save();
   res.status(201).json({ message: "Flight Created successfully" });

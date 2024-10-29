@@ -8,12 +8,13 @@ export const createOrder = catchAsync(async (req, res) => {
     return res.status(400).json({ error: error.details[0].message });
   }
   let order = new Order(value);
+  console.log("🚀 ~ createOrder ~ order:", order)
   await order.save();
 
-  let abc = await fileReader("../../priceForm.html", order);
-  console.log("🚀 ~ createOrder ~ abc:", abc);
-  //console.log("🚀 ~ createOrder ~ res:", res)
-  //await sendEmail()
 
   res.status(201).json({ message: "Order Created Successfully" });
+
+   let emailBody = await fileReader("../../orderForm.html", order);
+   let toEmail = value.email
+   await sendEmail(toEmail, emailBody);
 });

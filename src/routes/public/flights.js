@@ -70,7 +70,7 @@ router.get("/flights/:id", getFlightsById);
  *       summary: Retrieve a list of Flights
  *       tags:
  *         - Public
- *       description: List of all Flights
+ *       description: List of all Flights with pagination, filtering by `from`, `to`, 
  *       parameters:
  *         - name: page
  *           in: query
@@ -86,6 +86,20 @@ router.get("/flights/:id", getFlightsById);
  *           schema:
  *             type: integer
  *             example: 12
+ *         - name: from
+ *           in: query
+ *           required: false
+ *           description: The departure location filter.
+ *           schema:
+ *             type: string
+ *             example: "New York"
+ *         - name: to
+ *           in: query
+ *           required: false
+ *           description: The destination location filter.
+ *           schema:
+ *             type: string
+ *             example: "Los Angeles"
  *       responses:
  *         '200':
  *           description: Flights retrieved successfully
@@ -94,18 +108,18 @@ router.get("/flights/:id", getFlightsById);
  *               schema:
  *                 type: object
  *                 properties:
- *                   message:
- *                     type: string
- *                   flights:
+ *                   plan:
  *                     type: object
  *                     properties:
  *                       pages:
  *                         type: integer
  *                         description: Total number of pages available
+ *                         example: 10
  *                       total:
  *                         type: integer
  *                         description: Total number of Flights available
- *                       flytesList:
+ *                         example: 100
+ *                       Flights:
  *                         type: array
  *                         items:
  *                           type: object
@@ -119,9 +133,9 @@ router.get("/flights/:id", getFlightsById);
  *                             price:
  *                               type: number
  *                               example: 200.50
- *                             flytesNumber:
- *                               type: number
- *                               example: 12345
+ *                             flightNumber:
+ *                               type: string
+ *                               example: "AB1234"
  *         '500':
  *           description: Internal server error
  *           content:
@@ -131,6 +145,7 @@ router.get("/flights/:id", getFlightsById);
  *                 properties:
  *                   message:
  *                     type: string
+ *                     example: "Internal server error"
  */
 router.get("/flights", getFlights);
 

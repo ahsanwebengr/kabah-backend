@@ -38,12 +38,28 @@
         color: #333;
         margin-top: 0;
       }
-    </style>
+      </style>
   </head>
   <body>
     <div class="container">
       <h2>Your Travel Information</h2>
       <table>
+        <tr>
+          <th>Full Name</th>
+          <td><%= order.full_name%></td>
+        </tr>
+        <tr>
+          <th>Email Address</th>
+          <td><%= order.email %></td>
+        </tr>
+        <tr>
+          <th>Contact No.</th>
+          <td><%= order.contact_no %></td>
+        </tr>
+        <tr>
+          <th>subject</th>
+          <td><%= order.subject %></td>
+        </tr>
         <tr>
           <th>Departure Airport</th>
           <td><%= order.departure_airport %></td>
@@ -77,28 +93,8 @@
           <td><%= order.children %></td>
         </tr>
         <tr>
-          <th>Full Name</th>
-          <td><%= order.full_name%></td>
-        </tr>
-        <tr>
-          <th>Contact No.</th>
-          <td><%= order.contact_no %></td>
-        </tr>
-        <tr>
-          <th>subject</th>
-          <td><%= order.subject %></td>
-        </tr>
-        <tr>
           <th>hotel_category</th>
           <td><%= order.hotel_category %></td>
-        </tr>
-        <tr>
-          <th>Email Address</th>
-          <td><%= order.email %></td>
-        </tr>
-        <tr>
-          <th>Email Address</th>
-          <td><%= order.email %></td>
         </tr>
       </table>
     </div>

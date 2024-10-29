@@ -31,7 +31,6 @@ export const sendToken = async (res, user, message) => {
 
 // ************************ file Reader ******************************
 export const fileReader = async (file, order) => {
-  console.log("🚀 ~ fileReader ~ file:", file);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const filePath = path.resolve(__dirname, file);
@@ -39,8 +38,6 @@ export const fileReader = async (file, order) => {
   try {
     // Read the HTML file
     let emailFile = await fs.readFile(filePath, "utf8");
-    console.log("🚀 ~ fileReader ~ emailFile:", emailFile);
-
     // Compile the EJS template
     const compiledTemplate = ejs.compile(emailFile);
 

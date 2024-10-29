@@ -7,6 +7,7 @@ import {
 } from "../../controllers/admin.js/flights.js";
 
 import { isAdmin } from "../../middleware/auth.js";
+import { count } from "console";
 const router = express.Router();
 /**
  * @swagger
@@ -67,6 +68,9 @@ router.post("/flights", isAdmin, createFlights);
  *             schema:
  *               type: object
  *               properties:
+ *                 airline:
+ *                   type: string
+ *                   example: "PIA"
  *                 from:
  *                   type: string
  *                   example: "New York"
@@ -123,3 +127,6 @@ router.delete("/flights/:id", isAdmin, deleteFlights);
 router.delete("/flights", isAdmin, deleteAllFlights);
 
 export default router;
+
+
+
