@@ -8,13 +8,14 @@ import getContactForm from './src/routes/admin/contactForm.js';
 import order from './src/routes/admin/order.js';
 import auth from './src/routes/admin/auth.js';
 import flights from './src/routes/admin/flights.js';
+import additionalPage from './src/routes/admin/additional-pages.js';
 
 import contact_form from './src/routes/public/contact.js';
 import publicPlan from './src/routes/public/plan.js';
 import publicBlogs from './src/routes/public/blog.js';
 import publicFlights from './src/routes/public/flights.js';
 import publicOrders from './src/routes/public/order.js';
-import additionalPage from './src/routes/admin/additional-pages.js';
+import publicPages from './src/routes/public/additional-pages.js';
 
 export const app = express();
 
@@ -42,3 +43,4 @@ app.use('/public', publicPlan);
 app.use('/public', publicBlogs);
 app.use('/public', publicFlights);
 app.use('/public', publicOrders);
+app.use('/public', publicPages);
