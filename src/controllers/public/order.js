@@ -7,14 +7,14 @@ export const createOrder = catchAsync(async (req, res) => {
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
+  console.log(req.body);
   let order = new Order(value);
-  console.log("🚀 ~ createOrder ~ order:", order)
+  console.log("🚀 ~ createOrder ~ order:", order);
   await order.save();
-
 
   res.status(201).json({ message: "Order Created Successfully" });
 
-   let emailBody = await fileReader("../../orderForm.html", order);
-   let toEmail = value.email
-   await sendEmail(toEmail, emailBody);
+  let emailBody = await fileReader("../../orderForm.html", order);
+  let toEmail = value.email;
+  await sendEmail(toEmail, emailBody);
 });

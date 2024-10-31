@@ -127,6 +127,3 @@ router.delete("/flights/:id", isAdmin, deleteFlights);
 router.delete("/flights", isAdmin, deleteAllFlights);
 
 export default router;
-
-
-

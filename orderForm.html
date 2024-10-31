@@ -45,25 +45,35 @@
       <h2>Your Contact Information</h2>
       <table>
         <tr>
-          <th>Full Name </th>
+          <th>Full Name</th>
           <td><%= order.full_name %></td>
         </tr>
         <tr>
-          <th>Contact No </th>
-          <td><%= order.contact_no %></td>
-        </tr>
-        <tr>
-          <th>Email Address </th>
+          <th>Email Address</th>
           <td><%= order.email %></td>
         </tr>
         <tr>
-          <th>Subject </th>
-          <td><%= order.subject %></td>
+          <th>Contact No</th>
+          <td><%= order.contact_no %></td>
         </tr>
         <tr>
-          <th>Your Message</th>
-          <td><%= order.message %></td>
+          <th>Departure Date</th>
+          <td><%= order.departure_date %></td>
         </tr>
+
+        <tr>
+          <th>Children</th>
+          <td><%= order.children %></td>
+        </tr>
+                <tr>
+          <th>Adults</th>
+          <td><%= order.adults %></td>
+        </tr>
+              <tr>
+          <th>additional_info</th>
+          <td><%= order.additional_info %></td>
+        </tr>
+
       </table>
     </div>
   </body>

@@ -18,6 +18,8 @@ export const createFlights = catchAsync(async (req, res) => {
 // update Flights
 export const updateFlights = catchAsync(async (req, res) => {
   const FlightsId = req.params.id;
+  req.body.to = req.body.to.toLowerCase().trim();
+  req.body.from = req.body.from.toLowerCase().trim();
   const updatedFlights = await Flights.findByIdAndUpdate(FlightsId, req.body, {
     new: true,
   });

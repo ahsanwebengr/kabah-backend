@@ -21,7 +21,6 @@ export const contactForm = catchAsync(async (req, res) => {
   await contact.save();
 
   let emailBody = await fileReader("../../priceForm.html", contact);
-  //console.log("🚀 ~ createOrder ~ res:", res)
   let toEmail="danishriazprogramer@gmail.com"
   await sendEmail(toEmail,emailBody);
   res.status(201).json({ message: "Contact Created Successfully" });
