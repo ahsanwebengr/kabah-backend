@@ -1,13 +1,12 @@
 import { Router } from 'express';
 import {
-  createAdditionalPages,
   getAdditionalPages,
+  getOneAdditionalPage,
 } from '../../controllers/admin.js/additional-pages.js';
-import { isAdmin } from '../../middleware/auth.js';
 
 const router = new Router();
 
 router.get('/additional-pages', getAdditionalPages);
-router.get('/additional-pages/:id', getAdditionalPages);
+router.get('/additional-pages/:slug', getOneAdditionalPage);
 
 export default router;

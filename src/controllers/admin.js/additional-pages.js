@@ -27,8 +27,8 @@ const getAdditionalPages = catchAsync(async (req, res) => {
 });
 
 const getOneAdditionalPage = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const page = await AdditionalPage.findById(id);
+  const { slug } = req.params;
+  const page = await AdditionalPage.findOne({ slug });
 
   if (!page) {
     return res.status(404).json({ error: 'Page Not Found' });
