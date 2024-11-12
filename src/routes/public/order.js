@@ -6,12 +6,20 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *   /public/orders:
+ *   /public/orders/{plan_id}:
  *     post:
  *       summary: Create an order
  *       tags:
  *         - Public
  *       description: Endpoint to create a new order
+ *       parameters:
+ *         - in: path
+ *           name: plan_id
+ *           required: true
+ *           schema:
+ *             type: string
+ *             example: "6725d07ca25c33083310219d"
+ *           description: ID of the plan (MongoDB ObjectId)
  *       requestBody:
  *         required: true
  *         content:
@@ -40,16 +48,12 @@ const router = express.Router();
  *                 children:
  *                   type: integer
  *                   example: 2
- *                   description: Number of children 
+ *                   description: Number of children
  *                 adults:
  *                   type: integer
  *                   example: 2
- *                   description: Number of adults 
- *                 plan_id:
- *                   type: string
- *                   example: "66faf2203c686cc08c4c7e74" 
- *                   description: ID of the plan (MongoDB ObjectId)  
-*                 additional_info:
+ *                   description: Number of adults
+ *                 additional_info:
  *                   type: string
  *                   example: "Please provide a vegetarian meal option."
  *                   description: Additional information
@@ -88,6 +92,6 @@ const router = express.Router();
  *                     type: string
  *                     example: "Internal server error"
  */
-router.post("/orders", createOrder);
+router.post("/orders/:plan_id", createOrder);
 
 export default router;

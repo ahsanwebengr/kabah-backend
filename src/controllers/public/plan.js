@@ -1,6 +1,7 @@
 import Plans from "../../models/plan.js";
 import { catchAsync } from "../../middleware/utils.js";
-
+import NodeCache from "node-cache";
+let nodeCache = new NodeCache();
 //getPlan
 export const getPlan = catchAsync(async (req, res) => {
   const plan = await Plans.findById(req.params.id);
@@ -10,7 +11,7 @@ export const getPlan = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Plan Get Successfully", plan });
 });
 
-//getPlans
+// getPlans
 export const getPlans = catchAsync(async (req, res) => {
   let { page, limit, category, hotels_rating } = req.query;
   let query = {};
@@ -23,9 +24,9 @@ export const getPlans = catchAsync(async (req, res) => {
   if (category && hotels_rating) {
     query = { category: category, hotels_rating: hotels_rating };
   }
- let plan = await Plans.find(query).limit(limit)
+  let plan = await Plans.find(query)
+    .limit(limit)
     .skip((page - 1) * limit);
-  
 
   let count = await Plans.countDocuments(query);
   plan = {

@@ -27,8 +27,10 @@
     "jwt-decode": "^4.0.0",
     "moment": "^2.29.4",
     "mongoose": "^8.0.1",
+    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "multer-s3": "^3.0.1",
+    "node-cache": "^5.1.2",
     "node-cron": "^3.0.3",
     "node-downloader-helper": "^2.1.9",
     "nodemailer": "^6.9.15",
@@ -42,6 +44,9 @@
   "author": "Muhammad Talha",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "@types/node": "^22.8.5",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   }
 }

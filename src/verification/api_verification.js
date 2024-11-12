@@ -209,8 +209,6 @@ const blog_form_validationSchema = Joi.object({
 const order_validationSchema = Joi.object({
   full_name: Joi.string().required(),
 
-  plan_id: Joi.string().length(24).required(),
-
   email: Joi.string().email().required(),
 
   contact_no: Joi.number().required(),
@@ -253,6 +251,8 @@ const flightsValidationSchema = Joi.object({
     "any.required": `"flightsNumber" is a required field`,
   }),
 });
+
+
 
 export {
   adminRegisterValidation,

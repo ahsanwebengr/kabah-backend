@@ -25,17 +25,17 @@ export const createBlog = catchAsync(async (req, res) => {
 export const updateBlog = catchAsync(async (req, res) => {
   const blogId = req.params.id;
   let { slug, title } = req.body;
-
-  if (req?.file) {
-    req.body.image = req.file.filename;
-  }
+  let checkTitle = await Blogs.findOne({ title: title, _id: { $ne: blogId } });
+   console.log("🚀 ~ updateBlog ~ checkTitle:", checkTitle)
+   
+   if (!req.file) {
+     req.body.image = checkTitle?.image;
+   } else {
+     req.body.image = req.file.filename;
+   }
 
   slug = title.toLowerCase().split(" ").slice(0, 2).join("-");
   req.body.slug = slug;
-
-  let checkTitle = await Blogs.findOne({ title: title, _id: { $ne: blogId } });
-
-
   if (checkTitle) {
     return res.status(409).json({ error: "Title Already Exists" });
   }

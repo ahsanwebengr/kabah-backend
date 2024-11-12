@@ -145,7 +145,7 @@ const planSchema = Schema({
     },
     rating: {
       type: String,
-      enum: ["3_star", "4_star", "5_star"],
+      enum: ["3_star", "4_star", "5_star", "2_star"],
     },
     wheel_chair_friendly: {
       type: Boolean,
@@ -188,7 +188,7 @@ const planSchema = Schema({
     },
     rating: {
       type: String,
-      enum: ["3_star", "4_star", "5_star"],
+      enum: ["3_star", "4_star", "5_star", "2_star"],
     },
     wheel_chair_friendly: {
       type: Boolean,

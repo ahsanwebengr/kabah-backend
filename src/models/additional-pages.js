@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const additionalPagesSchema = new Schema(
   {
@@ -6,11 +6,11 @@ const additionalPagesSchema = new Schema(
       type: String,
       unique: true,
       trim: true,
-      required: [true, 'Title is required'],
+      required: [true, "Title is required"],
     },
     content: {
       type: String,
-      required: [true, 'Content is required'],
+      required: [true, "Content is required"],
     },
     slug: {
       type: String,
@@ -21,6 +21,6 @@ const additionalPagesSchema = new Schema(
   { timestamps: true }
 );
 
-const AdditionalPage = model('AdditionalPage', additionalPagesSchema);
+const AdditionalPage = model("AdditionalPage", additionalPagesSchema);
 
 export default AdditionalPage;

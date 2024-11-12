@@ -42,26 +42,29 @@ export const deleteAllContacts = catchAsync(async (req, res) => {
   let { type } = req.query;
   let query = {};
   if (type) {
-    query = {type: type};
+    query = { type: type };
   }
-  await Contacts.deleteMany(query);
-  res.status(200).json({});
+  let contacts = await Contacts.deleteMany(query);
+  console.log("🚀 ~ deleteAllContacts ~ contacts:", contacts)
+  if (contacts.deletedCount === 0) {
+    return res.status(404).json({ error: "No Contacts Found to Delete" });
+  }
+
+  res.status(200).json({ message: "All Contacts Deleted Successfully" });
 });
 
 // update contacts
 
 export const updateContacts = catchAsync(async (req, res) => {
-
   if (!req.body.status) {
     return res.status(400).json({ error: "Status is required" });
   }
 
   console.log("Updating status to:", req.body.status);
 
-
   const contacts = await Contacts.findByIdAndUpdate(
     req.params.id,
-    { status: req.body.status }, 
+    { status: req.body.status },
     {
       new: true,
     }
@@ -76,7 +79,6 @@ export const updateContacts = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Contact Updated Successfully", contacts });
 });
 
-
 // delete by id
 export const deleteContact = catchAsync(async (req, res) => {
   const contacts = await Contacts.findByIdAndDelete(req.params.id);
@@ -85,7 +87,6 @@ export const deleteContact = catchAsync(async (req, res) => {
   }
   res.status(200).json({});
 });
-
 
 // stats
 export const stats = catchAsync(async (req, res) => {
@@ -97,23 +98,20 @@ export const stats = catchAsync(async (req, res) => {
     status: "pending",
   });
 
-  const resolvedContacts = await Contacts.countDocuments({
-    status: "resolved",
-  });
+
 
   const totalBlogs = await Blogs.countDocuments();
-  const totalOrders = await Orders.countDocuments();
+  const totalReservations = await Orders.countDocuments();
   const totalHajjPlans = await Plans.countDocuments({ category: "hajj" });
   const totalUmrahPlans = await Plans.countDocuments({ category: "umrah" });
-  const totalPlans = await Plans.countDocuments()
+  const totalPlans = await Plans.countDocuments();
 
   res.status(200).json({
     totalContacts,
     completeContacts,
     pendingContacts,
-    resolvedContacts,
     totalBlogs,
-    totalOrders,
+    totalReservations,
     totalHajjPlans,
     totalUmrahPlans,
     totalPlans,
