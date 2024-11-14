@@ -35,9 +35,13 @@ export const isAdmin = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    req.user = await Admins.findById(decoded._id);
-    if (req?.user?.accessToken != token) {
-      return UnauthorizedError(res, false, "You must be logged in");
+    req.user = await Admins.findOne({
+      _id: decoded._id,
+      isDelete: false,
+      accessToken: token,
+    });
+    if (!req?.user) {
+      return res.status(401).json({ error: "You Must Be Logged In" });
     }
     next();
   } catch (error) {

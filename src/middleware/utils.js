@@ -64,7 +64,7 @@ export const adminSendToken = async (res, user, message) => {
   try {
     const token = user.getAuthToken();
     let admins = await Admins.findById(user._id);
-    admins.accessToken = token;
+    admins.accessToken.push(token);
     await admins.save();
     const content = {
       accessToken: token,

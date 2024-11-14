@@ -37,6 +37,11 @@ const order_form_Schema = Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    enum: ["pending", "complete"],
+    default: "pending",
+  },
   isDeleted: {
     type: Boolean,
     default: false,

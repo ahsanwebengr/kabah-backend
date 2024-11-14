@@ -27,9 +27,7 @@ export const register = catchAsync(async (req, res) => {
   const admin = new Admin(req.body);
   await admin.save();
 
-  return res
-    .status(200)
-    .json({ message: `Admin Registered Successfully` });
+  return res.status(200).json({ message: `Admin Registered Successfully` });
 });
 
 // Login
@@ -53,19 +51,28 @@ export const login = catchAsync(async (req, res) => {
   return adminSendToken(res, admin, "Login Successfully");
 });
 
-// Logout API
-export const logOut = catchAsync(async (req, res) => {
-  const admin = await Admin.findById(req.user.id);
-  if (!admin) {
-    return res.status(404).json({ error: "User Not Found" });
+//logOut
+export const logOut = async (req, res) => {
+  const token = req?.headers["authorization"]?.split(" ")[1];
+
+  try {
+    const admin = await Admin.findByIdAndUpdate(
+      req.user.id,
+      { $pull: { accessToken: token } },
+      { new: true }
+    );
+
+    if (!admin) {
+      return res.status(404).json({ message: "admin could not be found." });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "admin has been logged out successfully." });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
-
-  admin.accessToken = "";
-  await admin.save();
-
-  return res.status(200).json({ message: "Logged Out Successfully" });
-});
-
+};
 // Send OTP
 export const sendOtp = catchAsync(async (req, res) => {
   let { email } = req.body;
@@ -108,4 +115,3 @@ export const verifyOTP = catchAsync(async (req, res) => {
     return res.status(404).json({ message: "OTP Expired" });
   }
 });
-

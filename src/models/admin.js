@@ -9,6 +9,7 @@ const adminSchema = new mongoose.Schema({
   role: {
     type: String,
   },
+  accessToken: [{ type: String }],
   email: {
     type: String,
     required: [true, "email is required"],
@@ -21,9 +22,6 @@ const adminSchema = new mongoose.Schema({
   isDelete: {
     type: Boolean,
     default: false,
-  },
-  accessToken: {
-    type: String,
   },
   password: {
     type: String,

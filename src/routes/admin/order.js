@@ -4,6 +4,7 @@ import {
   deleteAllOrders,
   deleteOrderById,
   getOrderById,
+  updateOrder,
 } from "../../controllers/admin.js/order.js"; // Adjust the path as needed
 const router = express.Router();
 import { isAdmin } from "../../middleware/auth.js";
@@ -209,4 +210,63 @@ router.delete("/orders",isAdmin, deleteAllOrders);
  */
 router.delete("/orders/:id",isAdmin, deleteOrderById);
 
+/**
+ * @swagger
+ * paths:
+ *   /admin/Order/{id}:
+ *     put:
+ *       summary: Update a contact's status
+ *       tags:
+ *         - Admin
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           description: The ID of the contact to update
+ *           schema:
+ *             type: string
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: The new status for the contact
+ *                   example: "complete"
+ *       responses:
+ *         '200':
+ *           description: Contact updated successfully
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *                     example: "Contact Updated Successfully"
+ *         '404':
+ *           description: Contact not found
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
+ *                     example: "Contact Not Found"
+ *         '400':
+ *           description: Invalid request
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
+ *                     example: "Invalid request"
+ */
+router.put('/Order/:id',isAdmin, updateOrder);
 export default router;
