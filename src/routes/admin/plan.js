@@ -40,7 +40,7 @@ import { isAdmin } from "../../middleware/auth.js";
  *                   example: "http://example.com/image.jpg"
  *                 category:
  *                   type: string
- *                   enum: ["hajj", "umrah"]
+ *                   enum: ["hajj", "umrah", "ramzan"]
  *                   description: "Select the category: umrah or hajj"
  *                   example: "hajj"
  *                 flights:

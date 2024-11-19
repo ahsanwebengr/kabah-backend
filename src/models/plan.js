@@ -14,7 +14,7 @@ const planSchema = Schema({
   },
   category: {
     type: String,
-    enum: ["hajj", "umrah"],
+    enum: ["hajj", "umrah", "ramzan"],
     required: true,
   },
   slug: {
